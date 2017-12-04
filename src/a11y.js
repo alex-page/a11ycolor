@@ -27,7 +27,7 @@ import { CheckColor, GetHsl, GetHex, GetContrast }  from './color';
  *
  * @return {string}            - The closest hexadecimal color for `toMakeA11y` on `background` to meet contrast requirements
  */
-export const A11yColor = ( toMakeA11y, background, ratioKey = 'small', steps = 0.1 ) => {
+export default function A11yColor( toMakeA11y, background, ratioKey = 'small', steps = 0.1 ) {
 	Log.verbose( `Finding closest A11yColor() for ${ toMakeA11y } on ${ background }` );
 
 	const ratios = {

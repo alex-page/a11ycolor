@@ -34,6 +34,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @return {boolean}       - True or false (if it is a color or not)
  */
 var CheckColor = exports.CheckColor = function CheckColor(color) {
+  if (color === 'transparent') {
+    return false;
+  }
   try {
     (0, _color2.default)(color);
     return true;
