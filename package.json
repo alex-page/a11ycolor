@@ -4,8 +4,11 @@
 	"description": "Generate the nearest accessible color.",
 	"scripts": {
 		"start": "npm run build && node dist/init.js",
+		"watch": "nodemon --watch src --exec npm run start",
 		"build": "babel src --out-dir dist --presets=env --sourcemaps",
-		"watch": "nodemon --watch src --exec npm run start"
+		"test": "jest",
+		"test:detail": "jest --coverage",
+		"test:watch": "jest --watch --coverage"
 	},
 	"repository": {
 		"type": "git",
@@ -45,11 +48,29 @@
 	},
 	"devDependencies": {
 		"jest-cli": "^21.2.1",
-		"nodemon": "^1.12.1"
+		"nodemon": "^1.12.2"
 	},
 	"dependencies": {
 		"babel-cli": "^6.26.0",
 		"babel-preset-env": "^1.6.1",
 		"color": "^2.0.1"
+	},
+	"jest": {
+		"testEnvironment": "node",
+		"testRegex": "\\.spec.js$",
+		"collectCoverageFrom": [
+			"src/*.js"
+		],
+		"roots": [
+			"./__tests__/unit/"
+		],
+		"coverageThreshold": {
+			"global": {
+				"branches": 0,
+				"functions": 0,
+				"lines": 0,
+				"statements": 0
+			}
+		}
 	}
 }
