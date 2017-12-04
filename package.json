@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "Generate the nearest accessible color.",
 	"scripts": {
+		"prepublish": "npm run build && npm run test",
 		"build": "babel src --out-dir dist --presets=env --sourcemaps",
 		"test": "jest",
 		"test:detail": "jest --coverage",
@@ -15,7 +16,8 @@
 	"keywords": [
 		"accessible",
 		"colour",
-		"color"
+		"color",
+		"contrast"
 	],
 	"main": "./dist/a11y.js",
 	"author": {
@@ -45,8 +47,7 @@
 		"url": "https://github.com/alex-page/a11ycolor/issues"
 	},
 	"devDependencies": {
-		"jest-cli": "^21.2.1",
-		"nodemon": "^1.12.2"
+		"jest-cli": "^21.2.1"
 	},
 	"dependencies": {
 		"babel-cli": "^6.26.0",
@@ -60,7 +61,7 @@
 			"src/*.js"
 		],
 		"roots": [
-			"./__tests__/unit/"
+			"./__tests__/"
 		],
 		"coverageThreshold": {
 			"global": {
