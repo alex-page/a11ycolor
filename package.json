@@ -3,8 +3,6 @@
 	"version": "1.0.0",
 	"description": "Generate the nearest accessible color.",
 	"scripts": {
-		"start": "npm run build && node dist/init.js",
-		"watch": "nodemon --watch src --exec npm run start",
 		"build": "babel src --out-dir dist --presets=env --sourcemaps",
 		"test": "jest",
 		"test:detail": "jest --coverage",
@@ -19,7 +17,7 @@
 		"colour",
 		"color"
 	],
-	"main": "./dist/init.js",
+	"main": "./dist/a11y.js",
 	"author": {
 		"name": "Alex Page",
 		"email": "alex@alexpage.com.au",
