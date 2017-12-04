@@ -27,6 +27,9 @@ import Color from 'color';
  * @return {boolean}       - True or false (if it is a color or not)
  */
 export const CheckColor = ( color ) => {
+	if( color === 'transparent' ) {
+		return false;
+	}
 	try {
 		Color( color );
 		return true;
