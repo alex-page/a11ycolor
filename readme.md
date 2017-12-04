@@ -1,4 +1,4 @@
-A11yColor
+🌈 A11yColor
 ==============
 
 > Generate the nearest accessible color.
