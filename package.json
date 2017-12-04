@@ -3,7 +3,9 @@
 	"version": "1.0.0",
 	"description": "Generate the nearest accessible color.",
 	"scripts": {
-		"start": ""
+		"start": "npm run build && node dist/init.js",
+		"build": "babel src --out-dir dist --presets=env --sourcemaps",
+		"watch": "nodemon --watch src --exec npm run start"
 	},
 	"repository": {
 		"type": "git",
@@ -41,6 +43,13 @@
 	"bugs": {
 		"url": "https://github.com/alex-page/a11ycolor/issues"
 	},
-	"devDependencies": {},
-	"dependencies": {}
+	"devDependencies": {
+		"jest-cli": "^21.2.1",
+		"nodemon": "^1.12.1"
+	},
+	"dependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-preset-env": "^1.6.1",
+		"color": "^2.0.1"
+	}
 }
