@@ -1,0 +1,46 @@
+{
+	"name": "a11ycolor",
+	"version": "1.0.0",
+	"description": "Generate the nearest accessible color.",
+	"scripts": {
+		"start": ""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/alex-page/a11ycolor.git"
+	},
+	"keywords": [
+		"accessible",
+		"colour",
+		"color"
+	],
+	"main": "./dist/init.js",
+	"author": {
+		"name": "Alex Page",
+		"email": "alex@alexpage.com.au",
+		"url": "http://alexpage.com.au"
+	},
+	"contributors": [
+		{
+			"name": "Dominik Wilkowski",
+			"email": "hi@dominik-wilkowski.com",
+			"url": "https://dominik-wilkowski.com/"
+		},
+		{
+			"name": "Trevor Brennan",
+			"email": "t@trevorbrennan.com",
+			"url": "http://trevorbrennan.com/"
+		},
+		{
+			"name": "Alex Page",
+			"email": "alex@alexpage.com.au",
+			"url": "http://alexpage.com.au"
+		}
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/alex-page/a11ycolor/issues"
+	},
+	"devDependencies": {},
+	"dependencies": {}
+}
