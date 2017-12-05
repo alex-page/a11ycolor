@@ -1,6 +1,6 @@
 {
 	"name": "a11ycolor",
-	"version": "1.0.0",
+	"version": "1.0.4",
 	"description": "Generate the nearest accessible color.",
 	"scripts": {
 		"prepublish": "npm run build && npm run test",
