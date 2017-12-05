@@ -12,11 +12,6 @@
 // Dependencies
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = A11yColor;
-
 var _helper = require('./helper');
 
 var _color = require('./color');
@@ -31,7 +26,7 @@ var _color = require('./color');
  *
  * @return {string}            - The closest hexadecimal color for `toMakeA11y` on `background` to meet contrast requirements
  */
-function A11yColor(toMakeA11y, background) {
+var A11yColor = function A11yColor(toMakeA11y, background) {
 	var ratioKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'small';
 	var steps = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.1;
 
@@ -93,4 +88,6 @@ function A11yColor(toMakeA11y, background) {
 	}
 
 	throw new Error('Color cannot be found with current settings');
-}
+};
+
+module.exports = A11yColor;
