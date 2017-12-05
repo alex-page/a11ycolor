@@ -1,6 +1,6 @@
 {
 	"name": "a11ycolor",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"description": "Generate the nearest accessible color.",
 	"scripts": {
 		"prepublish": "npm run build && npm run test",
@@ -47,11 +47,12 @@
 		"url": "https://github.com/alex-page/a11ycolor/issues"
 	},
 	"devDependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-plugin-add-module-exports": "^0.2.1",
+		"babel-preset-env": "^1.6.1",
 		"jest-cli": "^21.2.1"
 	},
 	"dependencies": {
-		"babel-cli": "^6.26.0",
-		"babel-preset-env": "^1.6.1",
 		"color": "^2.0.1"
 	},
 	"jest": {
