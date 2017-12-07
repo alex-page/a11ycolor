@@ -1,10 +1,14 @@
 /***************************************************************************************************************************************************************
- *
- * a11y.js
- *
- * A11yColor - Find the nearest accessible color
- *
- **************************************************************************************************************************************************************/
+*
+* index.js
+*
+* A11yColor - Find the nearest accessible color
+* CheckColor  - Check the value is a valid color
+* GetHsl      - Return the HSL value for a color
+* GetHex      - Return the Hex value for a color
+* GetContrast - Get the contrast between two colors
+*
+**************************************************************************************************************************************************************/
 
 
 'use strict';
@@ -13,11 +17,28 @@
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Dependencies
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
-const Log         = require( './helper' ).Log;
-const CheckColor  = require( './color' ).CheckColor;
-const GetContrast = require( './color' ).GetContrast;
-const GetHex      = require( './color' ).GetHex;
-const GetHsl      = require( './color' ).GetHsl;
+const Color = require( 'color' );
+
+
+/**
+ * CheckColor - Check the value is a valid color
+ *
+ * @param  {string}  color - The color to check if it's valid
+ *
+ * @return {boolean}       - True or false (if it is a color or not)
+ */
+const CheckColor = ( color ) => {
+	if( color === 'transparent' ) {
+		return false;
+	}
+	try {
+		Color( color );
+		return true;
+	}
+	catch( error ) {
+		return false;
+	}
+}
 
 
 /**
@@ -31,7 +52,6 @@ const GetHsl      = require( './color' ).GetHsl;
  * @return {string}            - The closest hexadecimal color for `toMakeA11y` on `background` to meet contrast requirements
  */
 const A11yColor = ( toMakeA11y, background, ratioKey = 'small', steps = 0.1 ) => {
-	Log.verbose( `Finding closest A11yColor() for ${ toMakeA11y } on ${ background }` );
 
 	const ratios = {
 		'large': 3,
@@ -54,17 +74,17 @@ const A11yColor = ( toMakeA11y, background, ratioKey = 'small', steps = 0.1 ) =>
 		throw new Error( `Only takes a number between 0.1 and 100 for the steps` );
 	}
 
-	const ratio = ratios[ ratioKey ];                             // Get the ratio from the ratios object
-	let currentRatio = GetContrast( toMakeA11y, background );	    // Get the current contrast
+	const ratio      = ratios[ ratioKey ];                                   // Get the ratio from the ratios object
+	let currentRatio = Color( toMakeA11y ).contrast( Color( background ) );  // Get the current contrast
 
 	// Check the ratio straight away, if it passes return the value as hex
 	if ( currentRatio >= ratio ) {
-		return GetHex( toMakeA11y );
+		return Color( toMakeA11y ).hex();
 	}
 
 	// Set the initial variables
-	let colorLighter = GetHsl( toMakeA11y );  // We have to scope those variables outside the loop
-	let colorDarker  = GetHsl( toMakeA11y );  // so that we have access to them after the loop finished
+	let colorLighter = Color( toMakeA11y ).hsl();  // We have to scope those variables outside the loop
+	let colorDarker  = Color( toMakeA11y ).hsl();  // so that we have access to them after the loop finished
 	let ratioLighter = currentRatio;          // doing it for all of them
 	let ratioDarker  = currentRatio;          // just ever so slightly boring :)
 
@@ -75,22 +95,21 @@ const A11yColor = ( toMakeA11y, background, ratioKey = 'small', steps = 0.1 ) =>
 		colorLighter.color[ 2 ] += 1;  // then we lighten a new color
 		colorDarker.color[ 2 ]  -= 1;  // and darken another
 
-		ratioLighter = GetContrast( colorLighter, background ); // now we assign the new ratios; the loop will break
-		ratioDarker  = GetContrast( colorDarker,  background ); // when one of these is beyond the defined ration
+		ratioLighter = Color( colorLighter ).contrast( Color( background ) ); // now we assign the new ratios; the loop will break
+		ratioDarker  = Color( colorDarker ).contrast( Color( background ) );  // when one of these is beyond the defined ration
 
-		i = i + steps; // iterate by increasing our step
+		i = i + steps;                 // iterate by increasing our step
 
 		// Only return if the ratio is accessible
 		if ( ratioLighter >= ratio ) {
-			return GetHex( colorLighter );
+			return Color( colorLighter ).hex();
 		}
 		else if ( ratioDarker >= ratio ) {
-			return GetHex( colorDarker );
+			return Color( colorDarker ).hex();
 		}
 	}
 
 	throw new Error( 'Color cannot be found with current settings' );
 }
-
 
 module.exports = A11yColor;
