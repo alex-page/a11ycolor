@@ -3,6 +3,7 @@
 
 > Generate the nearest accessible color.
 
+
 ## Install
 
 ```console
@@ -12,12 +13,10 @@ $ npm install a11ycolor
 ## Usage
 
 ```js
-import A11yColor from 'a11ycolor';
+const A11yColor = require( 'a11ycolor' );
 
 A11yColor( red, blue ); // This returns #FFA3A3
 ```
-
-this will ouput: `#ffa3a3`
 
 
 ## Parameters

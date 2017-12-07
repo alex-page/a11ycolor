@@ -17,7 +17,7 @@
  *
  * @type {Object}
  */
-export const Style = {
+const Style = {
 
 	/**
 	 * Parse ansi code while making sure we can nest colors
@@ -65,7 +65,7 @@ export const Style = {
  *
  * @type {Object}
  */
-export const Log = {
+const Log = {
 	verboseMode: false, // verbose flag
 
 
@@ -148,3 +148,9 @@ export const Log = {
 		console.log(`\n`);
 	},
 };
+
+
+module.exports = {
+	Log: Log,
+	Style: Style,
+}
