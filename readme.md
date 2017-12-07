@@ -35,6 +35,7 @@ A11yColor( $toMakeA11y, $background, $ratioKey = 'small', steps = 0.1 );
 
 ## Release History
 
+* v1.0.6 - Minimizing the files
 * v1.0.5 - Removing babel
 * v1.0.4 - Updating documentation
 * v1.0.3 - Making import work
