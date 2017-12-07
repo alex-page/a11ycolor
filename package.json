@@ -4,9 +4,7 @@
 	"description": "Generate the nearest accessible color.",
 	"scripts": {
 		"prepublish": "npm run test",
-		"test": "jest",
-		"test:detail": "jest --coverage",
-		"test:watch": "jest --watch --coverage"
+		"test": "ava"
 	},
 	"repository": {
 		"type": "git",
@@ -19,7 +17,7 @@
 		"contrast",
 		"a11ycolor"
 	],
-	"main": "./src/a11y.js",
+	"main": "index.js",
 	"author": {
 		"name": "Alex Page",
 		"email": "alex@alexpage.com.au",
@@ -47,27 +45,9 @@
 		"url": "https://github.com/alex-page/a11ycolor/issues"
 	},
 	"devDependencies": {
-		"jest-cli": "^21.2.1"
+		"ava": "^0.24.0"
 	},
 	"dependencies": {
 		"color": "^2.0.1"
-	},
-	"jest": {
-		"testEnvironment": "node",
-		"testRegex": "\\.spec.js$",
-		"collectCoverageFrom": [
-			"src/*.js"
-		],
-		"roots": [
-			"./__tests__/"
-		],
-		"coverageThreshold": {
-			"global": {
-				"branches": 0,
-				"functions": 0,
-				"lines": 0,
-				"statements": 0
-			}
-		}
 	}
 }
