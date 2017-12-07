@@ -1,10 +1,9 @@
 {
 	"name": "a11ycolor",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Generate the nearest accessible color.",
 	"scripts": {
-		"prepublish": "npm run build && npm run test",
-		"build": "babel src --out-dir dist --presets=env --sourcemaps",
+		"prepublish": "npm run test",
 		"test": "jest",
 		"test:detail": "jest --coverage",
 		"test:watch": "jest --watch --coverage"
@@ -17,9 +16,10 @@
 		"accessible",
 		"colour",
 		"color",
-		"contrast"
+		"contrast",
+		"a11ycolor"
 	],
-	"main": "./dist/a11y.js",
+	"main": "./src/a11y.js",
 	"author": {
 		"name": "Alex Page",
 		"email": "alex@alexpage.com.au",
@@ -47,8 +47,6 @@
 		"url": "https://github.com/alex-page/a11ycolor/issues"
 	},
 	"devDependencies": {
-		"babel-cli": "^6.26.0",
-		"babel-preset-env": "^1.6.1",
 		"jest-cli": "^21.2.1"
 	},
 	"dependencies": {

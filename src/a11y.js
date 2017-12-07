@@ -13,8 +13,11 @@
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Dependencies
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
-import { Log }                                      from './helper';
-import { CheckColor, GetHsl, GetHex, GetContrast }  from './color';
+const Log         = require( './helper' ).Log;
+const CheckColor  = require( './color' ).CheckColor;
+const GetContrast = require( './color' ).GetContrast;
+const GetHex      = require( './color' ).GetHex;
+const GetHsl      = require( './color' ).GetHsl;
 
 
 /**

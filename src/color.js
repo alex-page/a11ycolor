@@ -16,7 +16,7 @@
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Dependencies
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
-import Color from 'color';
+const Color = require( 'color' );
 
 
 /**
@@ -26,7 +26,7 @@ import Color from 'color';
  *
  * @return {boolean}       - True or false (if it is a color or not)
  */
-export const CheckColor = ( color ) => {
+const CheckColor = ( color ) => {
 	if( color === 'transparent' ) {
 		return false;
 	}
@@ -47,7 +47,7 @@ export const CheckColor = ( color ) => {
  *
  * @return {object}       - The Color module HSL object
  */
-export const GetHsl = ( color ) => {
+const GetHsl = ( color ) => {
 	let hsl;
 	try {
 		hsl = Color( color ).hsl();
@@ -66,7 +66,7 @@ export const GetHsl = ( color ) => {
  *
  * @return {string}       - The Color module Hex object
  */
-export const GetHex = ( color ) => {
+const GetHex = ( color ) => {
 	let hex;
 	try {
 		hex = Color( color ).hex();
@@ -86,7 +86,7 @@ export const GetHex = ( color ) => {
  *
  * @return {number}            - The contrast ratio of the foreground on the background
  */
-export const GetContrast = ( foreground, background ) => {
+const GetContrast = ( foreground, background ) => {
 	let contrast;
 	try {
 		contrast = Color( foreground ).contrast( Color( background ) );
@@ -95,4 +95,12 @@ export const GetContrast = ( foreground, background ) => {
 	catch( error ) {
 		throw error;
 	}
+}
+
+
+module.exports = {
+	CheckColor: CheckColor,
+	GetContrast: GetContrast,
+	GetHex: GetHex,
+	GetHsl: GetHsl,
 }
