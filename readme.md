@@ -1,4 +1,4 @@
-🌈 A11yColor
+🌈 A11yColor   ![Build status](https://travis-ci.org/alex-page/a11ycolor.svg?branch=master)
 ==============
 
 > Generate the nearest accessible color.
@@ -35,6 +35,7 @@ A11yColor( $toMakeA11y, $background, $ratioKey = 'small', steps = 0.1 );
 
 ## Release History
 
+* v1.0.7 - Adding travis
 * v1.0.6 - Minimizing the files
 * v1.0.5 - Removing babel
 * v1.0.4 - Updating documentation
