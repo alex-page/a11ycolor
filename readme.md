@@ -1,4 +1,4 @@
-🌈 A11yColor   ![Build status](https://travis-ci.org/alex-page/a11ycolor.svg?branch=master)
+🌈 A11yColor   [![Build Status](https://travis-ci.org/alex-page/a11ycolor.svg?branch=master)](https://travis-ci.org/alex-page/a11ycolor)
 ==============
 
 > Generate the nearest accessible color.
