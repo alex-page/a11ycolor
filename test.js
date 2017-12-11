@@ -58,6 +58,8 @@ test( 'A11yColor: should take a steps', t => {
 
 test( 'A11yColor: should throw error if color is invalid', t => {
 	t.throws( () => A11yColor( 'transparent', '#a' ) );
+	t.throws( () => A11yColor( 'red', '890u091u0u' ) );
+	t.throws( () => A11yColor( '9u10u09u', 'red' ) );
 	t.throws( () => A11yColor( '#1', '#a' ) );
 	t.throws( () => A11yColor( 'reeed', 'bluuu' ) );
 	t.throws( () => A11yColor( '#11', '#aa' ) );
