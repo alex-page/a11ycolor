@@ -83,22 +83,27 @@ const A11yColor = ( toMakeA11y, background, ratioKey = 'small', steps = 0.1 ) =>
 	}
 
 	// Set the initial variables
-	let colorLighter = Color( toMakeA11y ).hsl();  // We have to scope those variables outside the loop
-	let colorDarker  = Color( toMakeA11y ).hsl();  // so that we have access to them after the loop finished
 	let ratioLighter = currentRatio;          // doing it for all of them
 	let ratioDarker  = currentRatio;          // just ever so slightly boring :)
 
 	// Iterate until we find a valid color
-	let i = 1;
-	while ( ( ratioLighter < ratio || ratioDarker < ratio ) && i < 101 ) {
+	let i = 0;
+	while ( ( ratioLighter < ratio || ratioDarker < ratio ) && i < 100 ) {
 
-		colorLighter.color[ 2 ] += 1;  // then we lighten a new color
-		colorDarker.color[ 2 ]  -= 1;  // and darken another
+		let colorLighter = Color( toMakeA11y ).hsl();
+		let colorDarker  = Color( toMakeA11y ).hsl();
+
+		i = i + steps;                 // iterate by increasing our step
+
+		colorLighter.color[ 2 ] += i;  // then we lighten a new color
+		colorDarker.color[ 2 ]  -= i;  // and darken another
+
+		// Reset the HSL so we only compare the hex values
+		colorLighter = Color( colorLighter ).hex();
+		colorDarker =  Color( colorDarker ).hex();
 
 		ratioLighter = Color( colorLighter ).contrast( Color( background ) ); // now we assign the new ratios; the loop will break
 		ratioDarker  = Color( colorDarker ).contrast( Color( background ) );  // when one of these is beyond the defined ration
-
-		i = i + steps;                 // iterate by increasing our step
 
 		// Only return if the ratio is accessible
 		if ( ratioLighter >= ratio ) {

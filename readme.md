@@ -35,6 +35,7 @@ A11yColor( $toMakeA11y, $background, $ratioKey = 'small', steps = 0.1 );
 
 ## Release History
 
+* v1.1.0 - Fixing bugs that caused the contrast to be off by 0.2
 * v1.0.7 - Adding travis
 * v1.0.6 - Minimizing the files
 * v1.0.5 - Removing babel
