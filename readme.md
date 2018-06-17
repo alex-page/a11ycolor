@@ -41,7 +41,7 @@ We then find the minimum lightness and maximum lightness. This allows us to redu
 
 ## Release History
 
-* v2.0.0 - Moving to binary search, removing steps, adding eslint
+* v2.0.0 - Binary search, removing steps, adding eslint
 * v1.1.0 - Fixing bugs that caused the contrast to be off by 0.2
 * v1.0.7 - Adding travis
 * v1.0.6 - Minimizing the files
