@@ -1,4 +1,4 @@
-/***************************************************************************************************************************************************************
+/**
  *
  * index.js unit tests
  *
@@ -11,21 +11,23 @@
  * - GetHex
  * - GetContrast
  *
- **************************************************************************************************************************************************************/
+ */
 
 
-// -------------------------------------------------------------------------------------------------------------------------------------------------------------
+// -----
 // Local
-// -------------------------------------------------------------------------------------------------------------------------------------------------------------
+// -----
 import test from 'ava';
 import A11yColor from '.';
 
 
-/***************************************************************************************************************************************************************
+/*
  * CheckColor
- **************************************************************************************************************************************************************/
-test( 'A11yColor: should return accessible foreground color if color is valid', t => {
+ */
+test( 'A11yColor: should return accessible foreground color if color is valid', ( t ) => {
 	t.is( A11yColor( 'red', 'blue' ), '#FFA3A3' );
+	t.is( A11yColor( 'green', 'blue' ), '#00DA00' );
+	t.is( A11yColor( '#c0c0c0', '#c0c0c0' ), '#4F4F4F' );
 	t.is( A11yColor( '#646464', '#E0E0E0' ), '#636363' );
 	t.is( A11yColor( 'rebeccapurple', 'cornflowerblue' ), '#3F1F5E' );
 	t.is( A11yColor( '#111', '#f00' ), '#111111' );
@@ -40,24 +42,14 @@ test( 'A11yColor: should return accessible foreground color if color is valid', 
 });
 
 
-test( 'A11yColor: should take a ratio', t => {
+test( 'A11yColor: should take a ratio', ( t ) => {
 	t.is( A11yColor( 'red', 'blue', 'large' ), '#FF6666' );
 	t.is( A11yColor( 'red', 'blue', 'small' ), '#FFA3A3' );
 	t.throws( () => A11yColor( 'red', 'blue', 'abc' ) );
 });
 
 
-test( 'A11yColor: should take a steps', t => {
-	t.is( A11yColor( 'red', 'blue', 'small', 3 ), '#FFA8A8' );
-	t.is( A11yColor( 'red', 'blue', 'small', 0.5 ), '#FFA3A3' );
-	t.is( A11yColor( 'red', 'blue', 'large', 60 ), '#FFFFFF' );
-	t.throws( () => A11yColor( 'red', 'blue', 'small', true ) );
-	t.throws( () => A11yColor( 'red', 'blue', 'small', 0 ) );
-	t.throws( () => A11yColor( 'red', 'blue', 'small', 100 ) );
-});
-
-
-test( 'A11yColor: should throw error if color is invalid', t => {
+test( 'A11yColor: should throw error if color is invalid', ( t ) => {
 	t.throws( () => A11yColor( 'transparent', '#a' ) );
 	t.throws( () => A11yColor( 'red', '890u091u0u' ) );
 	t.throws( () => A11yColor( '9u10u09u', 'red' ) );

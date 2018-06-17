@@ -1,0 +1,57 @@
+extends: airbnb-base
+
+rules:
+  # Global settings
+  max-len:
+    - error
+    - code:       120   # Code max length
+      comments:   120
+      tabWidth:   2
+      ignoreUrls: true
+  indent:
+    - error
+    - tab
+  no-tabs: off
+  space-in-parens:
+    - error
+    - always
+    - exceptions: [ "{}" ]
+  template-curly-spacing:
+    - error
+    - always
+  brace-style:
+    - error
+    - stroustrup
+  keyword-spacing:
+    - error
+    - overrides:
+        if:
+          after: false
+        while:
+          after: false
+        for:
+          after: false
+        catch:
+          after: false
+        throw:
+          after: false
+  computed-property-spacing:
+    - error
+    - always
+  array-bracket-spacing:
+    - error
+    - always
+  key-spacing:
+    - error
+    - align: "value"
+  require-jsdoc:
+    - error
+    - require:
+        FunctionDeclaration: true
+        MethodDefinition: true
+        ClassDeclaration: true
+        ArrowFunctionExpression: true
+        FunctionExpression: true
+  valid-jsdoc:
+    - error
+    - requireReturn: false
