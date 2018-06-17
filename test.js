@@ -26,6 +26,8 @@ import A11yColor from '.';
  */
 test( 'A11yColor: should return accessible foreground color if color is valid', ( t ) => {
 	t.is( A11yColor( 'red', 'blue' ), '#FFA3A3' );
+	t.is( A11yColor( 'green', 'blue' ), '#00DA00' );
+	t.is( A11yColor( '#c0c0c0', '#c0c0c0' ), '#4F4F4F' );
 	t.is( A11yColor( '#646464', '#E0E0E0' ), '#636363' );
 	t.is( A11yColor( 'rebeccapurple', 'cornflowerblue' ), '#3F1F5E' );
 	t.is( A11yColor( '#111', '#f00' ), '#111111' );

@@ -70,20 +70,32 @@ const A11yColor = ( toMakeA11y, background, ratioKey = 'small' ) => {
 		return a11y.hex();
 	}
 
+
 	// Ratio didn't pass so we need to find the nearest color
-	const a11yLightness = a11y.hsl().color[ 2 ];
+	const a11yHSL = a11y.hsl();
+	const a11yLightness = a11yHSL.color[ 2 ];
 	const bgLightness = bg.hsl().color[ 2 ];
 	const minHexDiff = 0.39215686274;
 	let minLightness = 0;
 	let maxLightness = 100;
 
+
+	// If our colour passes contrast on the background colours lightness
+	if( bg.contrast( Color({
+		h: a11yHSL.color[ 0 ],
+		s: a11yHSL.color[ 1 ],
+		l: bgLightness,
+	}) ) >= ratio ) {
+		minLightness = a11yLightness;
+		maxLightness = bgLightness;
+	}
 	// If our colour passes contrast on black
-	if( Color( '#000' ).contrast( bg ) >= ratio ) {
+	else if( bg.contrast( Color( '#000' ) ) >= ratio ) {
 		maxLightness = a11yLightness > bgLightness
 			? bgLightness
 			: a11yLightness;
 	}
-	// Our colour fails on black
+	// Colour doesn't meet contrast pass on black
 	else {
 		minLightness = a11yLightness > bgLightness
 			? a11yLightness
@@ -91,7 +103,7 @@ const A11yColor = ( toMakeA11y, background, ratioKey = 'small' ) => {
 	}
 
 	// If the minimum lightness is 100 then we need to move in a positive direction
-	const direction = maxLightness === 100;
+	const direction = minLightness !== 0;
 
 	// The colour to return
 	let foundColor;
