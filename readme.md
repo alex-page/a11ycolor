@@ -24,17 +24,24 @@ A11yColor( red, blue ); // This returns #FFA3A3
 The function `A11yColor` function takes four parameters:
 
 ```js
-A11yColor( $toMakeA11y, $background, $ratioKey = 'small', steps = 0.1 );
+A11yColor( $toMakeA11y, $background, $ratioKey = 'small' );
 ```
 
 1. `toMakeA11y` - The color that is to be made accessible on the background
 1. `background` - The background color to for the contrast
 1. `ratioKey`   - The keyword 'small' ( 4.5 ) or 'large' ( 3.0 ) for the WCAG 2.1 contrast ratio
-1. `steps`      - The step size our function is searching for a new color in. The bigger the number the faster the process the rougher the found color.
+
+
+## Research
+
+The minimum lightness between hexadecimal colour values can be worked from converting two values one step away from eachother and comparing HSL. For example `#646464` and `#636363` have a lightness of `39.21568627450981` and `38.82352941176471`. The difference between them is `0.39215686274`. This allows us to return a colour when the minimum and maximum is less than `0.39215686274`.
+
+We then find the minimum lightness and maximum lightness. This allows us to reduce the area we do the binary search in. It also allows us to work out the direction of increased contrast. We can then use these to binary search.
 
 
 ## Release History
 
+* v2.0.0 - Moving to binary search, removing steps, adding eslint
 * v1.1.0 - Fixing bugs that caused the contrast to be off by 0.2
 * v1.0.7 - Adding travis
 * v1.0.6 - Minimizing the files
