@@ -2,11 +2,8 @@
  *
  * index.js
  *
- * A11yColor - Find the nearest accessible color
  * CheckColor  - Check the value is a valid color
- * GetHsl      - Return the HSL value for a color
- * GetHex      - Return the Hex value for a color
- * GetContrast - Get the contrast between two colors
+ * A11yColor   - Find the nearest accessible color
  *
  */
 
@@ -15,6 +12,7 @@
 // Dependencies
 // ----------------
 const Color = require( 'color' );
+
 
 /**
  * CheckColor - Check the value is a valid color
@@ -74,36 +72,35 @@ const A11yColor = ( toMakeA11y, background, ratioKey = 'small' ) => {
 	// Ratio didn't pass so we need to find the nearest color
 	const a11yHSL = a11y.hsl();
 	const a11yLightness = a11yHSL.color[ 2 ];
-	const bgLightness = bg.hsl().color[ 2 ];
-	const minHexDiff = 0.39215686274;
+	const minHexDiff = 100 / 255; // 255 Colors / 100% HSL
+
+	const isBlackBgContrast = bg.contrast( Color( '#000' ) ) >= ratio;
+	const isWhiteBgContrast = bg.contrast( Color( '#FFF' ) ) >= ratio;
 	let minLightness = 0;
 	let maxLightness = 100;
+	let isDarkColor = false;
 
-
-	// If our colour passes contrast on the background colours lightness
-	if( bg.contrast( Color({
-		h: a11yHSL.color[ 0 ],
-		s: a11yHSL.color[ 1 ],
-		l: bgLightness,
-	}) ) >= ratio ) {
-		minLightness = a11yLightness;
-		maxLightness = bgLightness;
+	// If black and white both pass on the background
+	if( isBlackBgContrast && isWhiteBgContrast ) {
+		// Change the min lightness if the color is light
+		if( a11yLightness >= 50 ) {
+			minLightness = a11yLightness;
+		}
+		// Change the max lightness if the color is dark
+		else {
+			maxLightness = a11yLightness;
+			isDarkColor = true;
+		}
 	}
 	// If our colour passes contrast on black
-	else if( bg.contrast( Color( '#000' ) ) >= ratio ) {
-		maxLightness = a11yLightness > bgLightness
-			? bgLightness
-			: a11yLightness;
+	else if( isBlackBgContrast ) {
+		maxLightness = a11yLightness;
+		isDarkColor = true;
 	}
 	// Colour doesn't meet contrast pass on black
 	else {
-		minLightness = a11yLightness > bgLightness
-			? a11yLightness
-			: bgLightness;
+		minLightness = a11yLightness;
 	}
-
-	// If the minimum lightness is 100 then we need to move in a positive direction
-	const direction = minLightness !== 0;
 
 	// The colour to return
 	let foundColor;
@@ -117,26 +114,29 @@ const A11yColor = ( toMakeA11y, background, ratioKey = 'small' ) => {
 			l: midLightness,
 		});
 
-		// If we meet contrast
-		if( Color( midA11y.hex() ).contrast( bg ) > ratio ) {
-			// The colour is in the minimal lightness range for one hexadecimal
-			if(	maxLightness - minLightness < minHexDiff ) {
+
+		// The colour meets contrast
+		if( Color( midA11y.hex() ).contrast( bg ) >= ratio ) {
+			// It is the minimal lightness range for one hexadecimal
+			if( maxLightness - minLightness <= minHexDiff ) {
 				foundColor = midA11y.hex();
 			}
-
-			if( direction ) {
-				maxLightness = midLightness;
-			}
-			else {
+			// If it is going to be a dark color move the min to mid
+			else if( isDarkColor ) {
 				minLightness = midLightness;
 			}
+			// If it is going to be a light color move the max to mid
+			else {
+				maxLightness = midLightness;
+			}
 		}
-		// We don't meet contrast
-		else if( direction ) {
-			minLightness = midLightness;
-		}
-		else {
+		// We do not meet minimum contrast if it is a dark color move max to mid
+		else if( isDarkColor ) {
 			maxLightness = midLightness;
+		}
+		// If it is a light color move min to mid
+		else {
+			minLightness = midLightness;
 		}
 	}
 
