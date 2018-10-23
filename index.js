@@ -121,17 +121,20 @@ const A11yColor = ( toMakeA11y, background, ratioKey = 'small' ) => {
 			if( maxLightness - minLightness <= minHexDiff ) {
 				foundColor = midA11y.hex();
 			}
+			// If it is going to be a dark color move the min to mid
 			else if( isDarkColor ) {
 				minLightness = midLightness;
 			}
+			// If it is going to be a light color move the max to mid
 			else {
 				maxLightness = midLightness;
 			}
 		}
-		// We do not meet minimum contrast
+		// We do not meet minimum contrast if it is a dark color move max to mid
 		else if( isDarkColor ) {
 			maxLightness = midLightness;
 		}
+		// If it is a light color move min to mid
 		else {
 			minLightness = midLightness;
 		}
