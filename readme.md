@@ -34,6 +34,7 @@ A11yColor( $toMakeA11y, $background, $ratioKey = 'small' );
 
 ## Release History
 
+* v2.0.2 - Replace travis with GitHub actions
 * v2.0.1 - Updating readme, fixing bug when white and black passes
 * v2.0.0 - Binary search, removing steps, adding eslint
 * v1.1.0 - Fixing bugs that caused the contrast to be off by 0.2
