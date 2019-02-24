@@ -6,10 +6,6 @@
  *
  * Tested methods:
  * - A11yColor
- * - CheckColor
- * - GetHsl
- * - GetHex
- * - GetContrast
  *
  */
 
@@ -17,14 +13,14 @@
 // -----
 // Local
 // -----
-import test from 'ava';
+import Test from 'ava';
 import A11yColor from '.';
 
 
 /*
  * CheckColor
  */
-test( 'A11yColor: should return accessible foreground color if color is valid', ( t ) => {
+Test( 'A11yColor: should return accessible foreground color if color is valid', ( t ) => {
 	t.is( A11yColor( 'red', 'blue' ), '#FFA3A3' );
 	t.is( A11yColor( 'green', 'blue' ), '#00DA00' );
 	t.is( A11yColor( '#c0c0c0', '#c0c0c0' ), '#4F4F4F' );
@@ -43,14 +39,14 @@ test( 'A11yColor: should return accessible foreground color if color is valid', 
 });
 
 
-test( 'A11yColor: should take a ratio', ( t ) => {
+Test( 'A11yColor: should take a ratio', ( t ) => {
 	t.is( A11yColor( 'red', 'blue', 'large' ), '#FF6666' );
 	t.is( A11yColor( 'red', 'blue', 'small' ), '#FFA3A3' );
 	t.throws( () => A11yColor( 'red', 'blue', 'abc' ) );
 });
 
 
-test( 'A11yColor: should throw error if color is invalid', ( t ) => {
+Test( 'A11yColor: should throw error if color is invalid', ( t ) => {
 	t.throws( () => A11yColor( 'transparent', '#a' ) );
 	t.throws( () => A11yColor( 'red', '890u091u0u' ) );
 	t.throws( () => A11yColor( '9u10u09u', 'red' ) );
