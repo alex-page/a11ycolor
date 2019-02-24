@@ -1,10 +1,10 @@
 {
 	"name": "a11ycolor",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "Generate the nearest accessible color.",
 	"scripts": {
-		"prepublish": "npm run test",
-		"test": "ava && eslint *.js"
+		"prepublishOnly": "npm run test",
+		"test": "ava && eslint index.js"
 	},
 	"repository": {
 		"type": "git",
@@ -45,7 +45,7 @@
 		"url": "https://github.com/alex-page/a11ycolor/issues"
 	},
 	"devDependencies": {
-		"ava": "^0.24.0",
+		"ava": "^1.2.1",
 		"eslint": "^4.19.1",
 		"eslint-config-airbnb-base": "^12.1.0",
 		"eslint-plugin-import": "^2.10.0"
