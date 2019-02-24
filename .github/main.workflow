@@ -22,7 +22,7 @@ action "Master branch only" {
 
 action "Publish" {
   uses = "actions/npm@master"
-  args = "publish --access public --dry-run"
+  args = "publish --access public"
   secrets = ["NPM_AUTH_TOKEN"]
   needs = ["Master branch only"]
 }
