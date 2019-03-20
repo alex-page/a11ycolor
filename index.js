@@ -5,30 +5,6 @@
  * CheckColor  - Check the value is a valid color
  * A11yColor   - Find the nearest accessible color
  *
- */
-
-
-// ----------------
-// Dependencies
-// ----------------
-const Color = require( 'color' );
-
-
-/**
- * CheckColor - Check the value is a valid color
- *
- * @param  {string}  color - The color to check if it's valid
- *
- * @return {boolean}       - True or false (if it is a color or not)
- */
-const CheckColor = ( color ) => {
-	if( color === 'transparent' ) {
-		return false;
-	}
-	try {
-		Color( color );
-		return true;
-	}
 	catch( error ) {
 		return false;
 	}
