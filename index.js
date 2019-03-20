@@ -140,7 +140,7 @@ const A11yColor = ( toMakeA11y, background, ratioKey = 'small' ) => {
 		}
 	}
 
-	return foundColor;
+
 };
 
 module.exports = A11yColor;
