@@ -3,7 +3,6 @@
 	"version": "2.0.3",
 	"description": "Generate the nearest accessible color.",
 	"scripts": {
-		"prepublishOnly": "npm run test --unsafe-perm",
 		"test": "ava && eslint *.js"
 	},
 	"repository": {
