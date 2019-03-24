@@ -34,6 +34,7 @@ A11yColor( $toMakeA11y, $background, $ratioKey = 'small' );
 
 ## Release History
 
+* v2.0.4 - Remove `prepublishOnly` script
 * v2.0.3 - Remove travis badge from README.md
 * v2.0.2 - Replace travis with GitHub actions
 * v2.0.1 - Updating readme, fixing bug when white and black passes
