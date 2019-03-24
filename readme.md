@@ -1,4 +1,4 @@
-🌈 A11yColor   [![Build Status](https://travis-ci.org/alex-page/a11ycolor.svg?branch=master)](https://travis-ci.org/alex-page/a11ycolor)
+🌈 A11yColor
 ==============
 
 > Generate the nearest accessible color.
@@ -34,6 +34,7 @@ A11yColor( $toMakeA11y, $background, $ratioKey = 'small' );
 
 ## Release History
 
+* v2.0.3 - Remove travis badge from README.md
 * v2.0.2 - Replace travis with GitHub actions
 * v2.0.1 - Updating readme, fixing bug when white and black passes
 * v2.0.0 - Binary search, removing steps, adding eslint
