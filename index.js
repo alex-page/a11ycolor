@@ -1,39 +1,32 @@
-/**
- *
- * index.js
- *
+/*
  * CheckColor  - Check the value is a valid color
  * A11yColor   - Find the nearest accessible color
- *
  */
 
-
-// ----------------
 // Dependencies
-// ----------------
-const Color = require( 'color' );
-
+const color = require('color');
 
 /**
  * CheckColor - Check the value is a valid color
  *
- * @param  {string}  color - The color to check if it's valid
+ * @param  {string}  colorValue - The color to check if it's valid
  *
  * @return {boolean}       - True or false (if it is a color or not)
  */
-const CheckColor = ( color ) => {
-	if( color === 'transparent' ) {
+const checkColor = colorValue => {
+	if (colorValue === 'transparent') {
 		return false;
 	}
+
+	color(colorValue);
+
 	try {
-		Color( color );
+		color(colorValue);
 		return true;
-	}
-	catch( error ) {
+	} catch (error) {
 		return false;
 	}
 };
-
 
 /**
  * A11yColor - Find the nearest accessible color
@@ -44,61 +37,57 @@ const CheckColor = ( color ) => {
  *
  * @return {string}            - The closest hex color for `toMakeA11y` on `background`
  */
-const A11yColor = ( toMakeA11y, background, ratioKey = 'small' ) => {
+const a11yColor = (toMakeA11y, background, ratioKey = 'small') => {
 	const ratios = {
 		large: 3,
-		small: 4.5,
+		small: 4.5
 	};
 
-	if( !CheckColor( toMakeA11y ) || !CheckColor( background ) ) {
-		throw new Error( 'Foreground and Background must be a valid CSS colour' );
+	if (!checkColor(toMakeA11y) || !checkColor(background)) {
+		throw new Error('Foreground and Background must be a valid CSS colour');
 	}
 
-	if( ratioKey !== 'small' && ratioKey !== 'large' ) {
-		throw new Error( 'Only takes "small" or "large" for the ratio' );
+	if (ratioKey !== 'small' && ratioKey !== 'large') {
+		throw new Error('Only takes "small" or "large" for the ratio');
 	}
 
 	// Variables needed to check ratio
-	const ratio = ratios[ ratioKey ];
-	const a11y = Color( toMakeA11y );
-	const bg = Color( background );
+	const ratio = ratios[ratioKey];
+	const a11y = color(toMakeA11y);
+	const bg = color(background);
 
 	// Check the ratio straight away, if it passes return the value as hex
-	if( a11y.contrast( bg ) >= ratio ) {
+	if (a11y.contrast(bg) >= ratio) {
 		return a11y.hex();
 	}
 
-
 	// Ratio didn't pass so we need to find the nearest color
 	const a11yHSL = a11y.hsl();
-	const a11yLightness = a11yHSL.color[ 2 ];
+	const a11yLightness = a11yHSL.color[2];
 	const minHexDiff = 100 / 255; // 255 Colors / 100% HSL
 
-	const isBlackBgContrast = bg.contrast( Color( '#000' ) ) >= ratio;
-	const isWhiteBgContrast = bg.contrast( Color( '#FFF' ) ) >= ratio;
+	const isBlackBgContrast = bg.contrast(color('#000')) >= ratio;
+	const isWhiteBgContrast = bg.contrast(color('#FFF')) >= ratio;
 	let minLightness = 0;
 	let maxLightness = 100;
 	let isDarkColor = false;
 
 	// If black and white both pass on the background
-	if( isBlackBgContrast && isWhiteBgContrast ) {
+	if (isBlackBgContrast && isWhiteBgContrast) {
 		// Change the min lightness if the color is light
-		if( a11yLightness >= 50 ) {
+		if (a11yLightness >= 50) {
 			minLightness = a11yLightness;
-		}
-		// Change the max lightness if the color is dark
-		else {
+		} else {
+			// Change the max lightness if the color is dark
 			maxLightness = a11yLightness;
 			isDarkColor = true;
 		}
-	}
-	// If our colour passes contrast on black
-	else if( isBlackBgContrast ) {
+	} else if (isBlackBgContrast) {
+		// If our colour passes contrast on black
 		maxLightness = a11yLightness;
 		isDarkColor = true;
-	}
-	// Colour doesn't meet contrast pass on black
-	else {
+	} else {
+		// Colour doesn't meet contrast pass on black
 		minLightness = a11yLightness;
 	}
 
@@ -106,36 +95,31 @@ const A11yColor = ( toMakeA11y, background, ratioKey = 'small' ) => {
 	let foundColor;
 
 	// Binary search until we find the colour that meets contrast
-	while( !foundColor ) {
-		const midLightness = ( minLightness + maxLightness ) / 2;
-		const midA11y = Color({
-			h: a11y.hsl().color[ 0 ],
-			s: a11y.hsl().color[ 1 ],
-			l: midLightness,
+	while (!foundColor) {
+		const midLightness = (minLightness + maxLightness) / 2;
+		const midA11y = color({
+			h: a11y.hsl().color[0],
+			s: a11y.hsl().color[1],
+			l: midLightness
 		});
 
-
 		// The colour meets contrast
-		if( Color( midA11y.hex() ).contrast( bg ) >= ratio ) {
+		if (color(midA11y.hex()).contrast(bg) >= ratio) {
 			// It is the minimal lightness range for one hexadecimal
-			if( maxLightness - minLightness <= minHexDiff ) {
+			if (maxLightness - minLightness <= minHexDiff) {
 				foundColor = midA11y.hex();
-			}
-			// If it is going to be a dark color move the min to mid
-			else if( isDarkColor ) {
+			} else if (isDarkColor) {
+				// If it is going to be a dark color move the min to mid
 				minLightness = midLightness;
-			}
-			// If it is going to be a light color move the max to mid
-			else {
+			} else {
+				// If it is going to be a light color move the max to mid
 				maxLightness = midLightness;
 			}
-		}
-		// We do not meet minimum contrast if it is a dark color move max to mid
-		else if( isDarkColor ) {
+		} else if (isDarkColor) {
+			// We do not meet minimum contrast if it is a dark color move max to mid
 			maxLightness = midLightness;
-		}
-		// If it is a light color move min to mid
-		else {
+		} else {
+			// If it is a light color move min to mid
 			minLightness = midLightness;
 		}
 	}
@@ -143,4 +127,4 @@ const A11yColor = ( toMakeA11y, background, ratioKey = 'small' ) => {
 	return foundColor;
 };
 
-module.exports = A11yColor;
+module.exports = a11yColor;
