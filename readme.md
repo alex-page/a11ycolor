@@ -11,17 +11,17 @@ $ npm install a11ycolor
 ## Usage
 
 ```js
-const A11yColor = require('a11ycolor');
+const a11yColor = require('a11ycolor');
 
-A11yColor(red, blue); // This returns #FFA3A3
+a11yColor(red, blue); // This returns #FFA3A3
 ```
 
 ## Parameters
 
-The function `A11yColor` function takes three parameters:
+The function `a11yColor` function takes three parameters:
 
 ```js
-A11yColor($toMakeA11y, $background, ($ratioKey = 'small'));
+a11yColor($toMakeA11y, $background, ($ratioKey = 'small'));
 ```
 
 1. `toMakeA11y` - The color that is to be made accessible on the background
