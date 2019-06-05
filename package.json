@@ -3,7 +3,7 @@
 	"version": "2.0.6",
 	"description": "Generate the nearest accessible color.",
 	"scripts": {
-		"test": "ava && xo *.js"
+		"test": "ava && xo"
 	},
 	"repository": {
 		"type": "git",
