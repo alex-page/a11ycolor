@@ -7,7 +7,7 @@
 const color = require('color');
 
 /**
- * CheckColor - Check the value is a valid color
+ * Check the value is a valid color
  *
  * @param  {string}  colorValue - The color to check if it's valid
  *
@@ -29,7 +29,7 @@ const checkColor = colorValue => {
 };
 
 /**
- * A11yColor - Find the nearest accessible color
+ * Find the nearest accessible color
  *
  * @param  {string} toMakeA11y - The color that is to be changed
  * @param  {string} background - The background color to for the contrast
