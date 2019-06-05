@@ -1,9 +1,9 @@
 {
 	"name": "a11ycolor",
-	"version": "2.0.4",
+	"version": "2.0.6",
 	"description": "Generate the nearest accessible color.",
 	"scripts": {
-		"test": "ava && eslint *.js"
+		"test": "ava && xo *.js"
 	},
 	"repository": {
 		"type": "git",
@@ -17,6 +17,9 @@
 		"a11ycolor"
 	],
 	"main": "index.js",
+	"files": [
+		"index.js"
+	],
 	"author": {
 		"name": "Alex Page",
 		"email": "alex@alexpage.com.au",
@@ -45,11 +48,9 @@
 	},
 	"devDependencies": {
 		"ava": "^1.2.1",
-		"eslint": "^4.19.1",
-		"eslint-config-airbnb-base": "^12.1.0",
-		"eslint-plugin-import": "^2.10.0"
+		"xo": "^0.24.0"
 	},
 	"dependencies": {
-		"color": "^2.0.1"
+		"color": "^3.1.2"
 	}
 }
