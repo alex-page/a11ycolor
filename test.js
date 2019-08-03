@@ -1,5 +1,5 @@
 /*
- * @file index.js
+ * Test for @file index.js
  */
 
 // Local dependencies
