@@ -30,6 +30,7 @@ a11yColor($toMakeA11y, $background, ($ratioKey = 'small'));
 
 ## Release History
 
+- v2.0.8 - Update dependencies
 - v2.0.7 - Update dependencies
 - v2.0.6 - Replace `eslint` with `xo`, adjust formatting
 - v2.0.5 - Use files instead of `.npmignore`
