@@ -31,6 +31,8 @@ a11yColor($toMakeA11y, $background, ($minimumContrast = 4.5));
 ## Release History
 
 - v3.0.0 - Use minimum contrast instead of contrast ratio
+- v2.0.9 - Update GitHub action to use yml syntax
+- v2.0.8 - Update dependencies
 - v2.0.7 - Update dependencies
 - v2.0.6 - Replace `eslint` with `xo`, adjust formatting
 - v2.0.5 - Use files instead of `.npmignore`

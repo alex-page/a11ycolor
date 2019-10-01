@@ -18,8 +18,6 @@ const checkColor = colorValue => {
 		return false;
 	}
 
-	color(colorValue);
-
 	try {
 		color(colorValue);
 		return true;
