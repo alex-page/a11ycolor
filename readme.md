@@ -21,15 +21,16 @@ a11yColor(red, blue); // This returns #FFA3A3
 The function `a11yColor` function takes three parameters:
 
 ```js
-a11yColor($toMakeA11y, $background, ($ratioKey = 'small'));
+a11yColor($toMakeA11y, $background, ($minimumContrast = 4.5));
 ```
 
 1. `toMakeA11y` - The color that is to be made accessible on the background
 1. `background` - The background color to for the contrast
-1. `ratioKey` - The keyword 'small' ( 4.5 ) or 'large' ( 3.0 ) for the WCAG 2.1 contrast ratio
+1. `minimumContrast` - The WCAG 2.1 contrast ratio
 
 ## Release History
 
+- v3.0.0 - Use minimum contrast instead of contrast ratio
 - v2.0.7 - Update dependencies
 - v2.0.6 - Replace `eslint` with `xo`, adjust formatting
 - v2.0.5 - Use files instead of `.npmignore`
