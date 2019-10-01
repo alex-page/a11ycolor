@@ -30,6 +30,7 @@ a11yColor($toMakeA11y, $background, ($ratioKey = 'small'));
 
 ## Release History
 
+- v2.0.9 - Update GitHub action to use yml syntax
 - v2.0.8 - Update dependencies
 - v2.0.7 - Update dependencies
 - v2.0.6 - Replace `eslint` with `xo`, adjust formatting
