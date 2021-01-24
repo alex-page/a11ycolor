@@ -1,9 +1,9 @@
-name: Publish package on master
+name: Publish package
 
 on:
   push:
     branches:
-    - master
+    - main
 
 jobs:
   deploy:
@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@main
+    - uses: actions/setup-node@main
       with:
         node-version: '10.x'
         registry-url: 'https://registry.npmjs.org'
