@@ -34,9 +34,11 @@ test('a11yColor: should return accessible foreground color if color is valid', t
 });
 
 test('a11yColor: should take a ratio', t => {
-	t.is(a11yColor('red', 'blue', 'large'), '#FF6666');
-	t.is(a11yColor('red', 'blue', 'small'), '#FFA3A3');
+	t.is(a11yColor('red', 'blue', 3), '#FF6666');
+	t.is(a11yColor('red', 'blue', 3), '#FFA3A3');
 	t.throws(() => a11yColor('red', 'blue', 'abc'));
+	t.throws(() => a11yColor('red', 'blue', 22));
+	t.throws(() => a11yColor('red', 'blue', -0.1));
 });
 
 test('a11yColor: should throw error if color is invalid', t => {

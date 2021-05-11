@@ -29,33 +29,29 @@ const checkColor = colorValue => {
 /**
  * Find the nearest accessible color
  *
- * @param  {string} toMakeA11y - The color that is to be changed
- * @param  {string} background - The background color to for the contrast
- * @param  {string} ratioKey   - The keyword 'small' or 'large' to set the WCAG 2.1 contrast ration or 3.0 or 4.5
+ * @param  {string} toMakeA11y      - The color that is to be changed
+ * @param  {string} background      - The background color to for the contrast
+ * @param  {string} minimumContrast - The WCAG 2.1 contrast ratio
  *
  * @return {string}            - The closest hex color for `toMakeA11y` on `background`
  */
-const a11yColor = (toMakeA11y, background, ratioKey = 'small') => {
-	const ratios = {
-		large: 3,
-		small: 4.5
-	};
-
+const a11yColor = (toMakeA11y, background, minimumContrast = 4.5) => {
 	if (!checkColor(toMakeA11y) || !checkColor(background)) {
 		throw new Error('Foreground and Background must be a valid CSS colour');
 	}
 
-	if (ratioKey !== 'small' && ratioKey !== 'large') {
-		throw new Error('Only takes "small" or "large" for the ratio');
+	if (typeof minimumContrast !== 'number' && minimumContrast < 0 && minimumContrast > 21) {
+		throw new Error(
+			`Minimum contrast must be a number between 0 and 21. It was ${minimumContrast}`
+		);
 	}
 
 	// Variables needed to check ratio
-	const ratio = ratios[ratioKey];
 	const a11y = color(toMakeA11y);
 	const bg = color(background);
 
 	// Check the ratio straight away, if it passes return the value as hex
-	if (a11y.contrast(bg) >= ratio) {
+	if (a11y.contrast(bg) >= minimumContrast) {
 		return a11y.hex();
 	}
 
@@ -64,8 +60,8 @@ const a11yColor = (toMakeA11y, background, ratioKey = 'small') => {
 	const a11yLightness = a11yHSL.color[2];
 	const minHexDiff = 100 / 255; // 255 Colors / 100% HSL
 
-	const isBlackBgContrast = bg.contrast(color('#000')) >= ratio;
-	const isWhiteBgContrast = bg.contrast(color('#FFF')) >= ratio;
+	const isBlackBgContrast = bg.contrast(color('#000')) >= minimumContrast;
+	const isWhiteBgContrast = bg.contrast(color('#FFF')) >= minimumContrast;
 	let minLightness = 0;
 	let maxLightness = 100;
 	let isDarkColor = false;
@@ -102,7 +98,7 @@ const a11yColor = (toMakeA11y, background, ratioKey = 'small') => {
 		});
 
 		// The colour meets contrast
-		if (color(midA11y.hex()).contrast(bg) >= ratio) {
+		if (color(midA11y.hex()).contrast(bg) >= minimumContrast) {
 			// It is the minimal lightness range for one hexadecimal
 			if (maxLightness - minLightness <= minHexDiff) {
 				foundColor = midA11y.hex();
