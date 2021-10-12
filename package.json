@@ -16,14 +16,13 @@
 		"contrast",
 		"a11ycolor"
 	],
-	"main": "index.js",
 	"files": [
 		"index.js"
 	],
 	"author": {
 		"name": "Alex Page",
 		"email": "alex@alexpage.com.au",
-		"url": "http://alexpage.com.au"
+		"url": "https://alexpage.dev"
 	},
 	"contributors": [
 		{
@@ -39,7 +38,7 @@
 		{
 			"name": "Alex Page",
 			"email": "alex@alexpage.com.au",
-			"url": "http://alexpage.com.au"
+			"url": "https://alexpage.dev"
 		}
 	],
 	"license": "MIT",
@@ -47,7 +46,6 @@
 		"url": "https://github.com/alex-page/a11ycolor/issues"
 	},
 	"devDependencies": {
-		"ava": "^1.2.1",
 		"xo": "^0.24.0"
 	},
 	"dependencies": {
