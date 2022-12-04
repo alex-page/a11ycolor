@@ -46,7 +46,7 @@
 		"url": "https://github.com/alex-page/a11ycolor/issues"
 	},
 	"devDependencies": {
-		"xo": "^0.24.0"
+		"xo": "^0.53.1"
 	},
 	"dependencies": {
 		"color": "^3.1.2"
